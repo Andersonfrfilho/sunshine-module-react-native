@@ -9,14 +9,18 @@ const LINKING_ERROR =
 const SunshineAndroid = NativeModules.SunshineAndroid
   ? NativeModules.SunshineAndroid
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
 
 export function multiply(a: number, b: number): Promise<number> {
   return SunshineAndroid.multiply(a, b);
+}
+
+export function login(): Promise<number> {
+  return SunshineAndroid.login();
 }

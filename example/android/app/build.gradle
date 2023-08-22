@@ -118,6 +118,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    implementation("io.smooch:core:9.2.0")
+    implementation("io.smooch:ui:9.2.0")
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

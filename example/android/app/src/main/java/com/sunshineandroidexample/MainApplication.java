@@ -9,6 +9,11 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
+import io.smooch.core.Settings;
+import io.smooch.core.Smooch;
+import io.smooch.core.SmoochCallback;
+import io.smooch.core.InitializationStatus;
+import io.smooch.ui.ConversationActivity;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -53,6 +58,19 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    Settings settings = new Settings("64da85ab7c38ec82ec734554");
+    settings.setServiceBaseUrl("https://api.smooch.io/v2/apps/");
+    Smooch.init(this, settings, new SmoochCallback<InitializationStatus>() {
+    @Override
+    public void run(Response<InitializationStatus> response) {
+        if (response.getData() == InitializationStatus.SUCCESS) {
+          System.out.println("UHULLLLLLL - iniciou");
+            // Inicialização bem-sucedida, você pode fazer algo aqui
+        } else {
+            // Algo deu errado durante a inicialização
+        }
+    }
+});
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();
